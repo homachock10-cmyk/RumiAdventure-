@@ -39,8 +39,20 @@ jobs:
       - name: Apply first 16-bit upgrade
         run: python3 scripts/upgrade_16bit.py
 
+      - name: Package updated source ZIP
+        run: |
+          mkdir -p dist
+          cd source
+          zip -qr ../dist/RumiAdventure-Updated-16bit.zip RumiAdventure2
+
       - name: Build Android APK
         run: gradle -p source/RumiAdventure2/android assembleDebug
+
+      - name: Save updated source ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: RumiAdventure-Updated-16bit-Source-ZIP
+          path: dist/RumiAdventure-Updated-16bit.zip
 
       - name: Save APK
         uses: actions/upload-artifact@v4
