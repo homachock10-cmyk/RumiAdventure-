@@ -26,7 +26,7 @@ jobs:
           gradle-version: '8.9'
 
       - name: Extract game project
-        run: unzip -o RumiAdventure-APK-project.zip -d source
+        run: unzip -o RumiAdventure-Updated-16bit.zip -d source
 
       - name: Build Android APK
         run: gradle -p source/RumiAdventure2/android assembleDebug
