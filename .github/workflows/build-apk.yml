@@ -25,8 +25,14 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Extract game project
-        run: unzip -o RumiAdventure-Updated-16bit.zip -d source
+      - name: Inspect and extract game project
+        run: |
+         echo "=== FILES IN ZIP ==="
+         unzip -l RumiAdventure-Updated-16bit.zip
+         echo "=== EXTRACT ZIP ==="
+         unzip -o RumiAdventure-Updated-16bit.zip -d source
+         echo "=== EXTRACTED FILES ==="
+         find source -maxdepth 4 -type f | head -200
 
       - name: Build Android APK
         run: gradle -p source/RumiAdventure2/android assembleDebug
