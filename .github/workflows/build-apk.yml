@@ -33,6 +33,8 @@ jobs:
          unzip -o RumiAdventure-Updated-16bit.zip -d source
          echo "=== EXTRACTED FILES ==="
          find source -maxdepth 4 -type f | head -200
+         echo "=== GAME HTML ==="
+         sed -n "1,260p" source/RumiAdventure2/index.html
 
       - name: Build Android APK
         run: gradle -p source/RumiAdventure2/android assembleDebug
