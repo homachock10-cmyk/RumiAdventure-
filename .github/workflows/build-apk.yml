@@ -39,9 +39,19 @@ jobs:
       - name: Apply first 16-bit upgrade
         run: python3 scripts/upgrade_16bit.py
 
-      - name: Package updated source ZIP
+      - name: Package updated source ZIP and build script
         run: |
-          mkdir -p dist
+          python3 -m py_compile scripts/upgrade_16bit.py
+          mkdir -p source/RumiAdventure2/scripts dist
+          cp scripts/upgrade_16bit.py source/RumiAdventure2/scripts/upgrade_16bit.py
+          cat > source/RumiAdventure2/BUILD_16BIT.md <<'EOF'
+          Rumi Adventure — 16-bit style build
+
+          The game source is in index.html. Android loads the matching copy from android/app/src/main/assets/index.html.
+          The pixel-art update script is scripts/upgrade_16bit.py.
+          In GitHub Actions, the workflow runs the script before packaging this ZIP and building the APK.
+          To reapply the update from the repository root, run: python3 scripts/upgrade_16bit.py
+          EOF
           cd source
           zip -qr ../dist/RumiAdventure-Updated-16bit.zip RumiAdventure2
 
