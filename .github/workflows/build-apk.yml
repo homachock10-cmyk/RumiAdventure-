@@ -36,6 +36,9 @@ jobs:
          echo "=== GAME HTML ==="
          sed -n "1,260p" source/RumiAdventure2/index.html
 
+      - name: Apply first 16-bit upgrade
+        run: python3 scripts/upgrade_16bit.py
+
       - name: Build Android APK
         run: gradle -p source/RumiAdventure2/android assembleDebug
 
